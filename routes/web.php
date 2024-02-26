@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
-Route::get('/{category}', [MainController::class, 'category'])->name('category');
-Route::get('/mobiles/{product}', [MainController::class, 'product'])->name('product');
 
+Route::prefix('basket')->group(function () {
+    Route::get('/', [BasketController::class, 'basket'])->name('basket');
+    Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
+    Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
+    Route::post('/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
+    Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+});
+Route::get('/{category}', [MainController::class, 'category'])->name('category');
+Route::get('/{category}/{product}', [MainController::class, 'product'])->name('product');
 
 
 
