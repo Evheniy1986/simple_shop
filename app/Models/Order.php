@@ -15,6 +15,11 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity')->withTimestamps();
     }
 
+//    public function user()
+//    {
+//        return $this->belongsTo(User::class);
+//    }
+
     public function getTotal()
     {
         $sum = 0;

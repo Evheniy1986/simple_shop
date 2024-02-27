@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Auth::routes();
+
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('get-logout');
+
+Route::middleware('auth')->group(function () {
+Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('home');
+
+});
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
@@ -27,11 +35,11 @@ Route::prefix('basket')->group(function () {
     Route::post('/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
     Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
 });
+
+
 Route::get('/{category}', [MainController::class, 'category'])->name('category');
 Route::get('/{category}/{product}', [MainController::class, 'product'])->name('product');
 
 
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

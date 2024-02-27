@@ -36,12 +36,24 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Админ панель</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Зарегистрироваться</a>
-                </li>
+                @auth()
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('get-logout') }}">Выйти</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('home') }}">Админ панель</a>
+                    </li>
+                @endauth
+
+                @guest()
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('login') }}">Войти</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('register') }}">Зарегистрироваться</a>
+                    </li>
+                @endguest
             </ul>
         </div>
     </div>
