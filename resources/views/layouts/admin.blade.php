@@ -23,7 +23,7 @@
                     <a class="nav-link" href="{{ route('index') }}">Вернуться на сайт</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Категории</a>
+                    <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">Товары</a>

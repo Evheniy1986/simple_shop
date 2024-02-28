@@ -39,7 +39,7 @@ class BasketController extends Controller
             $order = Order::create();
             session(['orderId' => $order->id]);
         } else {
-            $order = Order::findorFail($orderId);
+            $order = Order::findOrFail($orderId);
         }
 
         if ($order->products->contains($productId)) {
@@ -48,6 +48,11 @@ class BasketController extends Controller
             $pivotRow->update();
         } else {
             $order->products()->attach($productId);
+        }
+
+        if (auth()->check()) {
+            $order->user_id = auth()->id();
+            $order->save();
         }
 
         $product = Product::find($productId);

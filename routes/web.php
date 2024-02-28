@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
@@ -18,22 +21,25 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('get-logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('get-logout');
 
-Route::middleware('auth')->group(function () {
-Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('home');
-
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('home');
+    Route::resource('categories', CategoryController::class);
 });
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
 
 Route::prefix('basket')->group(function () {
-    Route::get('/', [BasketController::class, 'basket'])->name('basket');
-    Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
-    Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
     Route::post('/add/{id}', [BasketController::class, 'basketAdd'])->name('basket-add');
-    Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+
+    Route::middleware('basket_not_empty')->group(function () {
+        Route::get('/', [BasketController::class, 'basket'])->name('basket');
+        Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
+        Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
+        Route::post('/remove/{id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+    });
 });
 
 
