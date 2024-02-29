@@ -1,6 +1,6 @@
 <div class="col" style="width: 20rem">
-    <div class="card shadow-sm">
-        <img height="60px" class="card-img-top img-fluid" src="{{asset('storage/images/xiaomi.png')}}" alt="dhd">
+    <div class="card shadow-sm thumbnail">
+        <img height="240px" class="card-img-top" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}" alt="dhd">
         <div class="card-body">
             <h5 class="text-center">{{mb_substr($product->name.'..' ,0, 30) }}</h5>
             <p class="card-text text-center">Цена: {{ $product->price }}грн</p>

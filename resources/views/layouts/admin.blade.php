@@ -26,7 +26,7 @@
                     <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Товары</a>
+                    <a class="nav-link" href="{{ route('products.index') }}">Товары</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">Заказы</a>

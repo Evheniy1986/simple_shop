@@ -8,7 +8,7 @@
             <div class=" mx-auto">
                 <div class="card border-0">
                     <img class="card-img-top img-fluid m-auto" style="width: 3rem"
-                         src="{{asset('storage/images/xiaomi.png')}}" alt="dhd">
+                         src="{{\Illuminate\Support\Facades\Storage::url($category->image)}}" alt="dhd">
                     <div class="card-body">
                         <a href="{{ route('category', $category->code) }}"><h5
                                 class="text-center border-0">{{ $category->name }}</h5></a>

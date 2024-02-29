@@ -7,7 +7,7 @@
         <p class="text-center mb-3">Цена: <strong>{{ $product->price }} грн</strong></p>
         <div class=" mx-auto">
             <div class="card border-0">
-                <img class=" img-fluid m-auto" src="{{asset('storage/images/iphone_15.png')}}" alt="dhd">
+                <img height="240px" class=" m-auto" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}" alt="dhd">
                 <div class="card-body">
                     <p class="card-text text-center">{!! $product->description !!}</p>
                 </div>

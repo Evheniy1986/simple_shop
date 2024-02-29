@@ -17,7 +17,7 @@
             @foreach($order->products as $product)
                 <tr>
                     <td><img class="card-img-top img-fluid m-auto" style="width: 3rem"
-                             src="{{ asset('storage/images/xiaomi.png') }}" alt="dhd">
+                             src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="dhd">
                         <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
                     </td>
                     <td><span class="badge text-bg-secondary">{{ $product->pivot->quantity }}</span>

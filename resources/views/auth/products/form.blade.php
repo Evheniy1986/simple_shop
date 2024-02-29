@@ -1,0 +1,95 @@
+@extends('layouts.admin')
+
+@isset($product)
+    @section('title',  'Редактировать товар ' . $product->name)
+@else
+    @section('title',  'Добавить товар' )
+@endisset
+
+@section('content')
+    <div class="container">
+        <h2 class="text-center mb-3">{{isset($product) ? 'Редактировать товар ' . $product->name : 'Добавить категорию'}}</h2>
+        <div class=" mx-auto">
+            <form class="w-50 mx-auto" enctype="multipart/form-data" method="post"
+                  @isset($product)
+                      action="{{ route('products.update', $product) }}"
+
+                  @else
+                      action="{{ route('products.store') }}"
+                @endisset
+            >
+                @isset($product)
+                    @method('PUT')
+                @endisset
+                @csrf
+                <div class="mt-5">
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Код
+                        </div>
+                        <div class="col-9">
+                            <input type="text" name="code" class="form-control"
+                                   value="{{ isset($product) ? $product->code : old('code') }}">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Название
+                        </div>
+                        <div class="col-9">
+                            <input type="text" name="name" class="form-control"
+                                   value="{{ isset($product) ? $product->name : old('name') }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Категория
+                        </div>
+                        <div class="col-9">
+                                <select class="form-select" name="category_id" aria-label="Пример выбора по умолчанию">
+                                    @foreach($categories as $category)
+                                    <option {{ isset($product) && $product->category_id == $category->id ? 'selected' : ''}}
+                                            value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Описание
+                        </div>
+                        <div class="col-9">
+                                <textarea class="form-control" name="description" cols="30"
+                                          rows="4">{{ isset($product) ? $product->description : old('description') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Картинка
+                        </div>
+                        <div class="col-9">
+                            <input type="file" name="image" class="form-control"
+                                   value="{{ isset($product) ? $product->image : old('image') }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Цена
+                        </div>
+                        <div class="col-9">
+                            <input type="text" name="price" class="form-control"
+                                   value="{{ isset($product) ? $product->price : old('price') }}">
+                        </div>
+                    </div>
+                    <div>
+                        <input class="btn btn-success float-end" type="submit" value="Сохранить">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+@endsection
+
