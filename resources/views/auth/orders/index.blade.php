@@ -26,7 +26,7 @@
                     <td>{{ $order->created_at->format('H:i d/m/Y') }}</td>
                     <td>{{ $order->getTotal() }} грн</td>
                     <td>
-                        <button class="btn btn-success" type="submit">Открыть</button>
+                        <a href="{{ route('orders.show', $order) }}" class="btn btn-success">Открыть</a>
                     </td>
                 </tr>
             @endforeach

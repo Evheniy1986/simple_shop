@@ -26,6 +26,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('get-logout');
 
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('home');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
 });

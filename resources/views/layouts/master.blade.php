@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use Illuminate\Support\Facades\Route; @endphp
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,17 +20,18 @@
     <div class="container">
         <div class="collapse navbar-collapse d-flex justify-content-around ">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">Интернет магазин</a>
+                <li class="active">
+                    <a class="nav-link"
+                       href="{{ route('index') }}">Интернет магазин</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('index') }}">Все товары</a>
+                    <a @routeactive('index') href="{{ route('index') }}">Все товары</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('categories') }}">Категории</a>
+                    <a @routeactive('categor*') href="{{ route('categories') }}">Категории</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('basket') }}">Корзина</a>
+                    <a @routeactive('basket*') href="{{ route('basket') }}">Корзина</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">Сбросить проект в начальное состояние</a>
@@ -38,18 +40,18 @@
             <ul class="navbar-nav">
                 @auth()
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('get-logout') }}">Выйти</a>
+                        <a class="nav-link" href="{{ route('get-logout') }}">Выйти</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('home') }}">Админ панель</a>
+                        <a class="nav-link" href="{{ route('home') }}">Админ панель</a>
                     </li>
                 @endauth
 
                 @guest()
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('login') }}">Войти</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Войти</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ route('register') }}">Зарегистрироваться</a>
                     </li>
