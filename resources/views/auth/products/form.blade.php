@@ -31,6 +31,9 @@
                             <input type="text" name="code" class="form-control"
                                    value="{{ isset($product) ? $product->code : old('code') }}">
                         </div>
+                        @error('code')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="row mb-3">
@@ -41,6 +44,9 @@
                             <input type="text" name="name" class="form-control"
                                    value="{{ isset($product) ? $product->name : old('name') }}">
                         </div>
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
@@ -53,6 +59,9 @@
                                             value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                            @error('category_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -63,6 +72,9 @@
                                 <textarea class="form-control" name="description" cols="30"
                                           rows="4">{{ isset($product) ? $product->description : old('description') }}</textarea>
                         </div>
+                        @error('description')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
@@ -81,6 +93,9 @@
                             <input type="text" name="price" class="form-control"
                                    value="{{ isset($product) ? $product->price : old('price') }}">
                         </div>
+                        @error('price')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <input class="btn btn-success float-end" type="submit" value="Сохранить">

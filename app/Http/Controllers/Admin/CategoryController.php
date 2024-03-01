@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -29,13 +30,19 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
+
         $data = $request->all();
-        if (!empty($request->file('image'))) {
+        unset($data['image']);
+        if ($request->has('image')) {
             $path = $request->file('image')->store('categories', 'public');
             $data['image'] = $path;
         }
+
+//        if (!empty($request->file('image'))) {
+//
+//        }
 
         Category::query()->create($data);
         return redirect()->route('categories.index');
@@ -60,10 +67,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
 
         $data = $request->all();
+        unset($data['image']);
         if (!empty($request->file('image'))) {
             if (!empty($category->image) && file_exists(public_path('storage/'. $category->image))) {
                 unlink(storage_path('app/public/'.$category->image));
