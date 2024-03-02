@@ -42,10 +42,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('get-logout') }}">Выйти</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Админ панель</a>
-                    </li>
+                    @if(auth()->user()->isAdmin())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Админ панель</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('person.orders.index') }}">Личный кабинет</a>
+                        </li>
+                    @endif
                 @endauth
 
                 @guest()

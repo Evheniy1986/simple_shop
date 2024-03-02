@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use Illuminate\Support\Facades\Auth; @endphp
+    <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
@@ -19,18 +20,28 @@
     <div class="container">
         <div class="collapse navbar-collapse d-flex justify-content-around ">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">Вернуться на сайт</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('products.index') }}">Товары</a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="#">Заказы</a>
-                </li>
+                @if(Auth::check() && Auth::user()->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('index') }}">Вернуться на сайт</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('categories.index') }}">Категории</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('products.index') }}">Товары</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('home') }}">Заказы</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('index') }}">Вернуться на сайт</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('person.orders.index') }}">Заказы</a>
+                    </li>
+                @endif
+
             </ul>
             <ul class="navbar-nav">
                 @guest()

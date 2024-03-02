@@ -37,7 +37,6 @@
             </tr>
             </tbody>
         </table>
-        <a type="btn" class="btn btn-success float-md-end mt-4" href="{{ route('basket-place') }}">Оформить заказ</a>
     </div>
 @endsection
 

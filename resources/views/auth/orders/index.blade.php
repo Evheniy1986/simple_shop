@@ -26,7 +26,12 @@
                     <td>{{ $order->created_at->format('H:i d/m/Y') }}</td>
                     <td>{{ $order->getTotal() }} грн</td>
                     <td>
+                        @if(auth()->user()->isAdmin())
                         <a href="{{ route('orders.show', $order) }}" class="btn btn-success">Открыть</a>
+                        @else
+                            <a href="{{ route('person.orders.show', $order) }}" class="btn btn-success">Открыть</a>
+
+                        @endif
                     </td>
                 </tr>
             @endforeach

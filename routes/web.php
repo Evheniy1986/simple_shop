@@ -24,12 +24,19 @@ Auth::routes();
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('get-logout');
 
-Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
-    Route::get('/orders', [OrderController::class, 'index'])->name('home');
-    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-    Route::resource('categories', CategoryController::class);
-    Route::resource('products', ProductController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('person')->group(function () {
+        Route::get('/orders', [\App\Http\Controllers\Person\OrderController::class, 'index'])->name('person.orders.index');
+        Route::get('/orders/{order}', [\App\Http\Controllers\Person\OrderController::class, 'show'])->name('person.orders.show');
+    });
+    Route::middleware(['is_admin'])->prefix('admin')->group(function () {
+        Route::get('/orders', [OrderController::class, 'index'])->name('home');
+        Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+        Route::resource('categories', CategoryController::class);
+        Route::resource('products', ProductController::class);
+    });
 });
+
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
