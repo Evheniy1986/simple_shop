@@ -7,12 +7,16 @@
         <p class="text-center mb-3">Цена: <strong>{{ $product->price }} грн</strong></p>
         <div class=" mx-auto">
             <div class="card border-0">
-                <img height="240px" class=" m-auto" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}" alt="dhd">
+                <img height="240px" class=" m-auto" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}"
+                     alt="dhd">
                 <div class="card-body">
                     <p class="card-text text-center">{!! $product->description !!}</p>
                 </div>
-                <div class="mb-5 mx-auto">
-                    <a href="{{ route('basket') }}" class="btn btn-success" type="btn">Добавить в корзину</a>
+                <div class="mx-auto mt-4">
+                    <form action="{{ route('basket-add', $product) }}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                    </form>
                 </div>
             </div>
         </div>

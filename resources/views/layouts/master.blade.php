@@ -34,7 +34,7 @@
                     <a @routeactive('basket*') href="{{ route('basket') }}">Корзина</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Сбросить проект в начальное состояние</a>
+                    <a class="nav-link" href="{{ \route('reset') }}">Сбросить проект в начальное состояние</a>
                 </li>
             </ul>
             <ul class="navbar-nav">

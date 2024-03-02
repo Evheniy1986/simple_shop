@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+
+Route::get('reset', [ResetController::class, 'reset'])->name('reset');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('get-logout');
 
