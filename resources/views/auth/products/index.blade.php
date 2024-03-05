@@ -19,8 +19,8 @@
             @foreach($products as $product)
                 <tr>
                     <th scope="row">{{ $product->id }}</th>
-                    <td>{{ $product->code }}</td>
-                    <td>{{ $product->name }}</td>
+                    <td>{{mb_substr($product->code, 0, 20) }}</td>
+                    <td>{{ mb_substr($product->name, 0, 30) }}</td>
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
@@ -40,6 +40,7 @@
             </tbody>
         </table>
         <a class="btn bg-success" type="button" href="{{ route('products.create') }}">Добавить товар</a>
+        {{ $products->links() }}
     </div>
 
 @endsection

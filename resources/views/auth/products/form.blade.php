@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="container">
-        <h2 class="text-center mb-3">{{isset($product) ? 'Редактировать товар ' . $product->name : 'Добавить категорию'}}</h2>
+        <h2 class="text-center mb-3">{{isset($product) ? 'Редактировать товар ' . $product->name : 'Добавить товар'}}</h2>
         <div class=" mx-auto">
             <form class="w-50 mx-auto" enctype="multipart/form-data" method="post"
                   @isset($product)
@@ -97,6 +97,20 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    @foreach(['hit' => 'Хит', 'new' => 'Новинка', 'recommend' => 'Рекомендуемые'] as $field => $title)
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                {{ $title }}
+                            </div>
+                            <div class="col-9">
+                                <input type="checkbox" name="{{ $field }}" class="form-check-input"
+                                       {{ isset($product) && $product->$field == 1 ? 'checked' : '' }}>
+                            </div>
+                            @error($field)
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endforeach
                     <div>
                         <input class="btn btn-success float-end" type="submit" value="Сохранить">
                     </div>

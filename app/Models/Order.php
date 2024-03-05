@@ -15,10 +15,6 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity')->withTimestamps();
     }
 
-//    public function user()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
 
     public function getTotal()
     {
@@ -43,6 +39,10 @@ class Order extends Model
         } else {
             return false;
         }
+    }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
 }

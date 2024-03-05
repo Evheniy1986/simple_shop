@@ -36,6 +36,7 @@
             </tbody>
         </table>
         <a class="btn bg-success" type="button" href="{{ route('categories.create') }}">Добавить категорию</a>
+        {{ $categories->links() }}
     </div>
 
 @endsection

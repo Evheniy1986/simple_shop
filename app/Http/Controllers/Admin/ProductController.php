@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::paginate(10);
         return view('auth.products.index', compact('products'));
     }
 
@@ -39,6 +39,12 @@ class ProductController extends Controller
             $path = $request->file('image')->store('products', 'public');
             $data['image'] = $path;
         }
+        foreach (['new', 'hit', 'recommend'] as $fieldName) {
+            if (isset($data[$fieldName])) {
+                $data[$fieldName] = 1;
+            }
+        }
+
         Product::query()->create($data);
         return redirect()->route('products.index');
     }
@@ -67,12 +73,20 @@ class ProductController extends Controller
     {
         $data = $request->all();
         if (!empty($request->file('image'))) {
-//
+
             if (!empty($product->image) && file_exists(public_path('storage/' . $product->image))) {
                 unlink(storage_path('app/public/' . $product->image));
             }
             $path = $request->file('image')->store('products', 'public');
             $data['image'] = $path;
+        }
+
+        foreach (['new', 'hit', 'recommend'] as $fieldName) {
+            if (isset($data[$fieldName])) {
+                $data[$fieldName] = 1;
+            } else {
+                $data[$fieldName] = 0;
+            }
         }
         $product->update($data);
         return redirect()->route('products.index');
