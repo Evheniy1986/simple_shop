@@ -15,15 +15,24 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity')->withTimestamps();
     }
 
-
-    public function getTotal()
+    public function calculateFullSum()
     {
         $sum = 0;
         foreach ($this->products as $product) {
             $sum += $product->getPriceCount();
         }
         return $sum;
+    }
 
+    public static function changeFullSum($changeSum)
+    {
+       $sum = self::getFullSum() + $changeSum;
+       session(['full_order_sum' => $sum]);
+    }
+
+    public static function getFullSum()
+    {
+       return session('full_order_sum', 0);
     }
 
     public function saveOrder($name, $phone, $email)
@@ -35,6 +44,7 @@ class Order extends Model
             $this->status = 1;
             $this->save();
             session()->forget('orderId');
+            session()->forget('full_order_sum');
             return true;
         } else {
             return false;

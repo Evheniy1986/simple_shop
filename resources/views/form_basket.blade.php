@@ -4,7 +4,7 @@
 
     <div class="container">
         <h2 class="text-center mb-3">Подтверждение заказа</h2>
-        <p class="text-center mb-3">Общая стоимость: <strong>{{ $order->getTotal() }} грн</strong></p>
+        <p class="text-center mb-3">Общая стоимость: <strong>{{ $order->calculateFullSum() }} грн</strong></p>
         <div class=" mx-auto">
             <form class="w-50 mx-auto" action="{{ route('basket-confirm') }}" method="post">
                 @csrf

@@ -33,7 +33,7 @@
 
             <tr>
                 <td colspan="3">обшая стоимость</td>
-                <td>{{ $order->getTotal() }} грн</td>
+                <td>{{ $order->calculateFullSum() }} грн</td>
             </tr>
             </tbody>
         </table>
