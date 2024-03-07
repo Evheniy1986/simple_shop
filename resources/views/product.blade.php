@@ -4,6 +4,7 @@
 
     <div class="container">
         <h2 class="text-center mb-3">{{ $product->name }}</h2>
+        <h4 class="text-center mb-3">{{ $product->category->name }}</h4>
         <p class="text-center mb-3">Цена: <strong>{{ $product->price }} грн</strong></p>
         <div class=" mx-auto">
             <div class="card border-0">
@@ -15,7 +16,11 @@
                 <div class="mx-auto mt-4">
                     <form action="{{ route('basket-add', $product) }}" method="post">
                         @csrf
+                        @if($product->isAvailable())
                         <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                        @else
+                            <p class="text-danger">Товар не доступен</p>
+                        @endif
                     </form>
                 </div>
             </div>

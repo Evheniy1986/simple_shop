@@ -27,6 +27,7 @@ class ProductRequest extends FormRequest
             'description' => 'required|min:5',
             'category_id' => 'required',
             'price' => 'required|numeric|min:1',
+            'count' => 'required|numeric|min:0',
         ];
 
         return $rules;

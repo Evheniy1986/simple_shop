@@ -25,7 +25,11 @@
                 <div class="me-2">
                     <form action="{{ route('basket-add', $product) }}" method="post">
                         @csrf
+                        @if($product->isAvailable())
                         <button type="submit" class="btn btn-primary">В корзину</button>
+                        @else
+                             <p class="text-danger">Товар не доступен</p>
+                        @endif
                     </form>
                 </div>
 

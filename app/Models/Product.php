@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $with = 'category';
 
@@ -21,6 +23,7 @@ class Product extends Model
         'new',
         'hit',
         'recommend',
+        'count',
     ];
 
     public function category()
@@ -34,6 +37,11 @@ class Product extends Model
             return $this->pivot->quantity * $this->price;
         }
         return $this->price;
+    }
+
+    public function isAvailable(): bool
+    {
+       return !$this->trashed() && $this->count > 0;
     }
 
     public function scopeHit($query)

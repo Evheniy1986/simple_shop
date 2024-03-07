@@ -38,6 +38,10 @@
                 <td>{{ $product->category->name }}</td>
             </tr>
             <tr>
+                <td>Количество</td>
+                <td>{{ $product->count }} шт.</td>
+            </tr>
+            <tr>
                 <td>Лейблы</td>
                 <td>
                     @if($product->new === 1)

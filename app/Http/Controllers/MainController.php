@@ -42,9 +42,17 @@ class MainController extends Controller
         return view('category', compact('category'));
     }
 
-    public function product($category, $code= null)
+    public function product($category, $code)
     {
+
          $product = Product::query()->where('code', $code)->first();
+        if (!$product) {
+            if (auth()->check() && auth()->user()->isAdmin()) {
+                $product = Product::withTrashed()->where('code', $code)->first();
+            } else {
+                return redirect()->route('index');
+            }
+        }
         return view('product', compact('product'));
     }
 

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 @section('title',  'Заказ' .$order->id )
 @section('content')
-
     <div class="container">
         <div class="justify-content-center">
             <h2 class="text-center mb-5">Заказ №  {{ $order->id }}</h2>
@@ -19,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($order->products as $product)
+            @foreach($products as $product)
                 <tr>
                     <td><img class="card-img-top img-fluid m-auto" style="width: 3rem"
                              src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="dhd">

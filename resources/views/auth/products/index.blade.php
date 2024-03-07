@@ -12,6 +12,7 @@
                 <th scope="col">Название</th>
                 <th scope="col">Категория</th>
                 <th scope="col">Цена</th>
+                <th scope="col">Количество</th>
                 <th scope="col">Действие</th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td>{{ mb_substr($product->name, 0, 30) }}</td>
                     <td>{{ $product->category->name }}</td>
                     <td>{{ $product->price }}</td>
+                    <td>{{ $product->count }}</td>
                     <td>
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="post">
