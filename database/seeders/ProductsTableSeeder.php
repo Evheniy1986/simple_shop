@@ -21,7 +21,8 @@ class ProductsTableSeeder extends Seeder
                 'description' => 'З Redmi можливо все, що ви задумали
 Смартфон Redmi Note 13, оснащений потужним 6 нм процесором Snapdragon 685, легко підтримує режим багатозадачності і справляється з будь-якими викликами. 6.67-дюймовий FHD+ AMOLED дисплей з частотою оновлення 120 Гц та колірним охопленням 100% DCI-P3 радує соковитими кольорами та чіткими деталями. Основна камера з супер-чітким модулем 108 Мп отримує чудові фото навіть за слабкого освітлення. Завдяки швидкій зарядці потужністю 33 Вт поповнити заряд батареї можна перед виходом з дому.',
                 'image' => 'products/QaBoLSh6VwStky122NdP2T2Gi7pNw8mpDqNRnXVD.png',
-                'price' => 9299
+                'price' => 9299,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 1,
@@ -29,7 +30,8 @@ class ProductsTableSeeder extends Seeder
                 'code' => 'iPhone-15',
                 'description' => 'Экран (6.1", OLED (Super Retina XDR), 2556x1179) / Apple A17 Pro / основная квадрокамера: 48 Мп + 12 Мп + 12 Мп + 12 Мп, фронтальная камера: 12 Мп / 256 ГБ встроенной памяти / 3G / LTE / 5G / GPS / Nano-SIM / iOS 17',
                 'image' => 'products/c9dVDHMGZFXpCWXK8YqLjt2l7AeIDqf4VsqQSiWv.png',
-                'price' => 41999
+                'price' => 41999,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 3,
@@ -42,7 +44,8 @@ Dinamica позволяет создавать
 Автоматическая кофемашина премиум-класса
 от DeLonghi для всей семьи.',
                 'image' => 'products/7cGsqqQ0l5oCxQXH0lJFABgGUvvHp4m8tDf6BBdG.jpg',
-                'price' => 28999
+                'price' => 28999,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 3,
@@ -51,7 +54,8 @@ Dinamica позволяет создавать
                 'description' => 'Вписується у твій спосіб життя
 Холодильник Samsung RB38T679F з об\'ємом 400 літрів та інноваційними функціями стане незамінним для зберігання продуктів. Технологія всебічного охолодження All-Around Cooling забезпечує рівномірний розподіл холоду в кожному куточку камери, а функція No Frost запобігає утворенню льоду на стінках. Модель побудована на базі технології Digital Inverter, що гарантує ефективну роботу та довговічність – це підтверджено 20-річною гарантією на компресор.',
                 'image' => 'products/88Gfi4eawqOYr5wtDpdFZUgaqKSEMnH5QJeleZZY.jpg',
-                'price' => 28345
+                'price' => 28345,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 3,
@@ -73,7 +77,8 @@ Dinamica позволяет создавать
     Індикація ходу програми відображає всі етапи вибраного циклу.
     Таймер зворотного відліку',
                 'image' => 'products/CeWZNMaQX79VBIcYQvZVS0vbxNtaLQgSt4q8Xthu.png',
-                'price' => 13999
+                'price' => 13999,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 2,
@@ -81,7 +86,8 @@ Dinamica позволяет создавать
                 'code' => 'jbl-tune-720vt',
                 'description' => 'Бездротові навушники JBL Tune 720 BT дають чистий басовий звук JBL Pure Bass за допомогою з\'єднання Bluetooth 5.3. Завдяки цим технологіям ви отримаєте чудове звучання без дротів та обмежень. Щоб налаштувати техніку, використовуйте програму JBL Headphones. Система багатоточкового підключення суттєво полегшує використання у зв\'язці з декількома девайсами. Отримайте 76 годин автономної роботи за рахунок ємної батареї.',
                 'image' => 'products/Lp0rLk2kCCLqjWzbLSfCtJ8G6fZyf2rQgiPBhEiN.png',
-                'price' => 2399
+                'price' => 2399,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 2,
@@ -90,7 +96,8 @@ Dinamica позволяет создавать
                 'description' => 'Легенда у твоїх руках
 Приготуйтеся до нереального ігрового досвіду, який отримаєте з консоллю XBOX Series S. Вона стала тією самою приставкою, що доступна за ціною і забезпечує лише приємні враження від геймінгу. Продуктивність найвищого рівня, велика цифрова бібліотека, прискорене завантаження – що може бути крутіше? Додайте до цього підписку Game Pass Ultimate, що дає можливість протестувати ігри прямо в день їх виходу – краще за цю забавку не знайти!',
                 'image' => 'products/p7IGJviQjiLrnAOfKPWZ7DFSSrAvloTjvJRFlzL5.jpg',
-                'price' => 17999
+                'price' => 17999,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 3,
@@ -105,7 +112,8 @@ Dinamica позволяет создавать
 Завдяки компактній конструкції та вбудованій великій ручці м\'ясорубку зручно зберігати та транспортувати.
     М\'ясорубка Tefal HV 7в1 помічник, який завжди під рукою та готовий до роботи, якщо ви хочете приготувати смачні страви легко та швидко.',
                 'image' => 'products/04hjzrDZhqj0aE0nqGKJI4JedbTcWj0TSogPLyTi.jpg',
-                'price' => 3599
+                'price' => 3599,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 3,
@@ -113,7 +121,8 @@ Dinamica позволяет создавать
                 'code' => 'boiler',
                 'description' => 'Бойлер Бош самій лучший',
                 'image' => 'products/bDho166TajVubRuwwv9didCFZJZc7Ff7cMSB7AAT.jpg',
-                'price' => 6799
+                'price' => 6799,
+                'count' => rand(0,10)
             ],
             [
                 'category_id' => 1,
@@ -121,7 +130,8 @@ Dinamica позволяет создавать
                 'code' => 'note-7',
                 'description' => 'Xiami redmi note 7 black',
                 'image' => 'products/HlOYgk4h2DnxSumG82NGgwRNhW4CdCjg7Z1T0vCz.png',
-                'price' => 3999
+                'price' => 3999,
+                'count' => rand(0,10)
             ],
 
         ]);
