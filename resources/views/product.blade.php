@@ -14,14 +14,24 @@
                     <p class="card-text text-center">{!! $product->description !!}</p>
                 </div>
                 <div class="mx-auto mt-4">
-                    <form action="{{ route('basket-add', $product) }}" method="post">
-                        @csrf
-                        @if($product->isAvailable())
-                        <button type="submit" class="btn btn-success">Добавить в корзину</button>
-                        @else
-                            <p class="text-danger">Товар не доступен</p>
-                        @endif
-                    </form>
+                    @if($product->isAvailable())
+                        <form action="{{ route('basket-add', $product) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-success">Добавить в корзину</button>
+                            @else
+                                <span class="text-danger">Товар не доступен</span>
+                                <br>
+                                <span>Сообщить мне когда появиться</span>
+                                <form action="{{ route('subscription', $product) }}" method="post">
+                                    @csrf
+                                    <input class="mb-3 mt-3" type="text" name="email">
+                                    <button class="btn btn-primary" type="submit">Отправить</button>
+                                </form>
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            @endif
+                        </form>
                 </div>
             </div>
         </div>
