@@ -17,17 +17,17 @@
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label for="hit">
-                        <input type="checkbox" name="hit" @if(request()->has('hit')) checked @endif id="hit" size="6">Хит
+                        <input type="checkbox" name="hit" @if(request()->has('hit')) checked @endif id="hit" size="6"> {{ __('main.properties.hit') }}
                     </label>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label for="new">
-                        <input type="checkbox" name="new" @if(request()->has('new')) checked @endif id="new" size="6">Новинка
+                        <input type="checkbox" name="new" @if(request()->has('new')) checked @endif id="new" size="6"> {{ __('main.properties.new') }}
                     </label>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label for="recommend">
-                        <input type="checkbox" name="recommend" @if(request()->has('recommend')) checked @endif id="recommend" size="6">Рекомендуеммые
+                        <input type="checkbox" name="recommend" @if(request()->has('recommend')) checked @endif id="recommend" size="6"> {{ __('main.properties.recommend') }}
                     </label>
                 </div>
                 <div class="col-sm-2 col-md-2">

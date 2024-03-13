@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\BasketIsNotEmpty;
 use App\Http\Middleware\ChekIsAdmin;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'is_admin' => ChekIsAdmin::class,
         'basket_not_empty' => BasketIsNotEmpty::class,
+        'set_locale' => SetLocale::class,
     ];
 }

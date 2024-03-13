@@ -50,6 +50,18 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-3">
+                            Название En
+                        </div>
+                        <div class="col-9">
+                            <input type="text" name="name_en" class="form-control"
+                                   value="{{ isset($product) ? $product->name_en : old('name_en') }}">
+                        </div>
+                        @error('name_en')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
                             Категория
                         </div>
                         <div class="col-9">
@@ -71,6 +83,18 @@
                         <div class="col-9">
                                 <textarea class="form-control" name="description" cols="30"
                                           rows="4">{{ isset($product) ? $product->description : old('description') }}</textarea>
+                        </div>
+                        @error('description')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            Описание En
+                        </div>
+                        <div class="col-9">
+                                <textarea class="form-control" name="description_en" cols="30"
+                                          rows="4">{{ isset($product) ? $product->description_en : old('description_en') }}</textarea>
                         </div>
                         @error('description')
                         <div class="alert alert-danger">{{ $message }}</div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes, Translatable;
 
     protected $with = 'category';
 
@@ -24,6 +25,8 @@ class Product extends Model
         'hit',
         'recommend',
         'count',
+        'name_en',
+        'description_en',
     ];
 
     public function category()

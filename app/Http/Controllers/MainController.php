@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subscribtion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
@@ -68,4 +69,14 @@ class MainController extends Controller
     }
 
 
+    public function changeLocale($locale)
+    {
+        $availableLocale = ['ru', 'en'];
+        if (!in_array($locale, $availableLocale)) {
+            $locale = config('app.locale');
+        }
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+        return redirect()->back();
+    }
 }

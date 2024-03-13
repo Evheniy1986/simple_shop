@@ -20,7 +20,7 @@
         <div style="height: 100%" class="card-body">
             <h5 class="text-center">{{mb_substr($product->name.'..' ,0, 30) }}</h5>
             <p class="card-text text-center">Цена: {{ $product->price }}грн</p>
-            <p class="text-center">{{isset($category) ? $category->name : $product->category->name }}</p>
+            <p class="text-center">{{isset($category) ? $category->__('name') : $product->category->__('name') }}</p>
             <div class="d-flex justify-content-center ">
                 <div class="me-2">
                     <form action="{{ route('basket-add', $product) }}" method="post">

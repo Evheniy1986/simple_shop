@@ -22,10 +22,10 @@
             <ul class="navbar-nav">
                 <li class="active">
                     <a class="nav-link"
-                       href="{{ route('index') }}">Интернет магазин</a>
+                       href="{{ route('index') }}">{{ __('main.online_shop') }}</a>
                 </li>
                 <li class="nav-item ">
-                    <a @routeactive('index') href="{{ route('index') }}">Все товары</a>
+                    <a @routeactive('index') href="{{ route('index') }}">@lang('main.all_products')</a>
                 </li>
                 <li class="nav-item ">
                     <a @routeactive('categor*') href="{{ route('categories') }}">Категории</a>
@@ -34,7 +34,10 @@
                     <a @routeactive('basket*') href="{{ route('basket') }}">Корзина</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="{{ \route('reset') }}">Сбросить проект в начальное состояние</a>
+                    <a class="nav-link" href="{{ route('reset') }}">Сбросить проект в начальное состояние</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('locale', __('main.set_lang')) }}">@lang('main.set_lang')</a>
                 </li>
             </ul>
             <ul class="navbar-nav">

@@ -3,15 +3,15 @@
 @section('content')
 
     <div class="container">
-        <h2 class="text-center mb-3">{{ $product->name }}</h2>
-        <h4 class="text-center mb-3">{{ $product->category->name }}</h4>
+        <h2 class="text-center mb-3">{{ $product->__('name') }}</h2>
+        <h4 class="text-center mb-3">{{ $product->category->__('name') }}</h4>
         <p class="text-center mb-3">Цена: <strong>{{ $product->price }} грн</strong></p>
         <div class=" mx-auto">
             <div class="card border-0">
                 <img height="240px" class=" m-auto" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}"
                      alt="dhd">
                 <div class="card-body">
-                    <p class="card-text text-center">{!! $product->description !!}</p>
+                    <p class="card-text text-center">{!! $product->__('description') !!}</p>
                 </div>
                 <div class="mx-auto mt-4">
                     @if($product->isAvailable())
