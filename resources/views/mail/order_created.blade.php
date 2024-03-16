@@ -1,6 +1,6 @@
 <p>Уважаемый {{ $name }}.</p>
 
-<p>{{ __('mail/order_created.your_order') }}{{ $fullsum }} грн. создан.</p>
+<p>{{ __('mail/order_created.your_order') }}{{ $fullsum }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}. создан.</p>
 
 <table class="table">
     <thead>
@@ -19,14 +19,14 @@
                 <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
             </td>
             <td><span class="badge text-bg-secondary">{{ $product->pivot->quantity }}</span></td>
-            <td>{{ $product->price }} грн</td>
-            <td>{{ $product->getPriceCount() }} грн</td>
+            <td>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+            <td>{{ $product->getPriceCount() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
         </tr>
     @endforeach
 
     <tr>
         <td colspan="3">обшая стоимость</td>
-        <td>{{ $order->calculateFullSum() }} грн</td>
+        <td>{{ $order->calculateFullSum() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
     </tr>
     </tbody>
 </table>

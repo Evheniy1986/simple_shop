@@ -1,5 +1,4 @@
-@php use Illuminate\Support\Facades\Route; @endphp
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,10 +7,15 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous">
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/35689621a5.js" crossorigin="anonymous"></script>
 
+    {{--    @vite(['resources/js/app.js'])--}}
 
     <title>@yield('title')</title>
 </head>
@@ -38,6 +42,17 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('locale', __('main.set_lang')) }}">@lang('main.set_lang')</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ \App\Services\CurrencyConversion::getCurrencySymbol() }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        @foreach(\App\Services\CurrencyConversion::getCurrencies() as $currency)
+                            <li><a class="dropdown-item" href="{{ route('currency', $currency->code) }}">{{ $currency->symbol }}</a></li>
+                        @endforeach
+
+                    </ul>
                 </li>
             </ul>
             <ul class="navbar-nav">

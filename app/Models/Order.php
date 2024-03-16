@@ -28,6 +28,12 @@ class Order extends Model
         foreach ($this->products()->withTrashed()->get() as $product) {
             $sum += $product->getPriceCount();
         }
+        if (session()->has('full_order_sum')) {
+            session(['full_order_sum' => $sum]);
+        }
+//        if (!$product) {
+//            session()->forget('full_order_sum');
+//        }
         return $sum;
     }
 

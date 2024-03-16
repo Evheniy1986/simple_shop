@@ -5,7 +5,7 @@
     <div class="container">
         <h2 class="text-center mb-3">{{ $product->__('name') }}</h2>
         <h4 class="text-center mb-3">{{ $product->category->__('name') }}</h4>
-        <p class="text-center mb-3">Цена: <strong>{{ $product->price }} грн</strong></p>
+        <p class="text-center mb-3">Цена: <strong>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</strong></p>
         <div class=" mx-auto">
             <div class="card border-0">
                 <img height="240px" class=" m-auto" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}"
