@@ -9,8 +9,22 @@ class Currency extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'rate',
+    ];
+
     public function scopeByCode($query, $code)
     {
         return $query->where('code', $code);
+    }
+
+    public function isMain()
+    {
+        return $this->is_main == 1;
+    }
+
+    public function notMain()
+    {
+        return $this->is_main == 0;
     }
 }

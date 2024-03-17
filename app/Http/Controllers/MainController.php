@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Subscribtion;
+use App\Services\CurrencyRates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
@@ -16,6 +17,7 @@ class MainController extends Controller
 {
     public function index(ProductFilterRequest $request)
     {
+
         $productQuery = Product::with('category');
         if ($request->filled('price_from')) {
             $productQuery->where('price', '>=', $request->price_from);
