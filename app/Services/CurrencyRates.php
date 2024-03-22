@@ -30,6 +30,5 @@ class CurrencyRates
                 }
             }
         }
-        dump(1);
     }
 }

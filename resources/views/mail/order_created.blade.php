@@ -18,9 +18,9 @@
                      src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="dhd">
                 <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
             </td>
-            <td><span class="badge text-bg-secondary">{{ $product->pivot->quantity }}</span></td>
+            <td><span class="badge text-bg-secondary">{{ $product->countInOrder }}</span></td>
             <td>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
-            <td>{{ $product->getPriceCount() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+            <td>{{ $product->price * $product->countInOrder }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
         </tr>
     @endforeach
 

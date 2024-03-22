@@ -16,10 +16,17 @@ class Order extends Model
         'phone',
         'email',
         'status',
+        'currency_id',
+        'sum',
     ];
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'order_product')->withPivot(['quantity', 'price'])->withTimestamps();
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     public function calculateFullSum()
@@ -31,37 +38,40 @@ class Order extends Model
         if (session()->has('full_order_sum')) {
             session(['full_order_sum' => $sum]);
         }
-//        if (!$product) {
-//            session()->forget('full_order_sum');
-//        }
+
         return $sum;
     }
 
-    public static function changeFullSum($changeSum)
+    public  function getFullSum()
     {
-       $sum = self::getFullSum() + $changeSum;
-       session(['full_order_sum' => $sum]);
-    }
+        $sum = 0;
 
-    public static function getFullSum()
-    {
-       return session('full_order_sum', 0);
+        foreach ($this->products as $product) {
+           $sum += $product->price * $product->countInOrder;
+        }
+        return $sum;
     }
 
     public function saveOrder($name, $phone, $email)
     {
-        if ($this->status == 0) {
             $this->name= $name;
             $this->phone = $phone;
             $this->email = $email;
             $this->status = 1;
+            $this->sum = $this->getFullSum();
+
+            $products = $this->products;
             $this->save();
-            session()->forget('orderId');
-            session()->forget('full_order_sum');
+
+        foreach ($products as $productInOrder) {
+            $this->products()->attach($productInOrder, [
+                'quantity' => $productInOrder->countInOrder,
+                'price' => $productInOrder->price,
+            ]);
+            }
+            session()->forget('order');
             return true;
-        } else {
-            return false;
-        }
+
     }
 
     public function scopeActive($query)

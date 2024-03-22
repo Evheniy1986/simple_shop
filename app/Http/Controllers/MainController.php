@@ -51,7 +51,7 @@ class MainController extends Controller
     public function product($category, $code)
     {
 
-         $product = Product::query()->where('code', $code)->first();
+        $product = Product::query()->where('code', $code)->first();
         if (!$product) {
             if (auth()->check() && auth()->user()->isAdmin()) {
                 $product = Product::withTrashed()->where('code', $code)->first();
@@ -85,8 +85,8 @@ class MainController extends Controller
 
     public function changeCurrency($currencyCode)
     {
-       $currency = Currency::byCode($currencyCode)->firstOrFail();
-       session(['currency' => $currency->code]);
-       return redirect()->back();
+        $currency = Currency::byCode($currencyCode)->firstOrFail();
+        session(['currency' => $currency->code]);
+        return redirect()->back();
     }
 }

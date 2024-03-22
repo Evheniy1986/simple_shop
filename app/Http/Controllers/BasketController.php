@@ -13,7 +13,7 @@ class BasketController extends Controller
     {
         $order = (new Basket())->getOrder();
 
-        if (empty(session('orderId'))) {
+        if (empty(session('order'))) {
             return redirect()->route('index');
         }
 
@@ -61,7 +61,7 @@ class BasketController extends Controller
         if ((new Basket())->saveOrder($request->name, $request->phone, $request->email)) {
             session()->flash('success', __('basket.your_order_confirmed'));
         } else {
-            \session()->flash('warning', 'Товар не доступен для заказа');
+            session()->flash('warning', 'Товар не доступен для заказа');
         }
         return redirect()->route('index');
     }

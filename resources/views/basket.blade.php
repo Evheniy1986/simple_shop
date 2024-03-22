@@ -20,7 +20,7 @@
                              src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="dhd">
                         <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
                     </td>
-                    <td><span class="badge text-bg-secondary">{{ $product->pivot->quantity }}</span>
+                    <td><span class="badge text-bg-secondary">{{ $product->countInOrder }}</span>
                         <div class="btn-group">
                             <form action="{{ route('basket-remove', $product) }}" method="post">
                                 @csrf
@@ -33,13 +33,13 @@
                         </div>
                     </td>
                     <td>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
-                    <td>{{ $product->getPriceCount() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+                    <td>{{ $product->price * $product->countInOrder }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
                 </tr>
             @endforeach
 
             <tr>
                 <td colspan="3">обшая стоимость</td>
-                <td>{{ $order->calculateFullSum() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+                <td>{{ $order->getFullSum() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
             </tr>
             </tbody>
         </table>

@@ -24,7 +24,7 @@
                     <td>{{ $order->email }}</td>
                     <td>{{ $order->phone }}</td>
                     <td>{{ $order->created_at->format('H:i d/m/Y') }}</td>
-                    <td>{{ $order->calculateFullSum() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+                    <td>{{ $order->sum }} {{ $order->currency->code }}</td>
                     <td>
                         @if(auth()->user()->isAdmin())
                         <a href="{{ route('orders.show', $order) }}" class="btn btn-success">Открыть</a>

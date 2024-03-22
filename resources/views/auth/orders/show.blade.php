@@ -25,14 +25,14 @@
                         <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
                     </td>
                     <td><span class="badge text-bg-secondary">{{ $product->pivot->quantity }}</span></td>
-                    <td>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
-                    <td>{{ $product->getPriceCount() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+                    <td>{{ $product->pivot->price }} {{ $order->currency->symbol }}</td>
+                    <td>{{ $product->pivot->price * $product->pivot->quantity}} {{ $order->currency->symbol }}</td>
                 </tr>
             @endforeach
 
             <tr>
                 <td colspan="3">обшая стоимость</td>
-                <td>{{ $order->calculateFullSum() }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</td>
+                <td>{{ $order->sum }} {{ $order->currency->code }}</td>
             </tr>
             </tbody>
         </table>
