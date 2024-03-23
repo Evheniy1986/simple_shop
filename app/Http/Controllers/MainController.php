@@ -17,7 +17,6 @@ class MainController extends Controller
 {
     public function index(ProductFilterRequest $request)
     {
-
         $productQuery = Product::with('category');
         if ($request->filled('price_from')) {
             $productQuery->where('price', '>=', $request->price_from);
@@ -38,8 +37,7 @@ class MainController extends Controller
 
     public function categories()
     {
-        $categories = Category::query()->get();
-        return view('categories', compact('categories'));
+        return view('categories'); // Получаем $categories из ViewServiceProvider
     }
 
     public function category($slug)

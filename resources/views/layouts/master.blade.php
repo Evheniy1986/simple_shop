@@ -19,7 +19,7 @@
 
     <title>@yield('title')</title>
 </head>
-<body>
+<body class="">
 <nav class="bg-dark  navbar navbar-dark navbar-expand-lg">
     <div class="container">
         <div class="collapse navbar-collapse d-flex justify-content-around ">
@@ -45,11 +45,12 @@
                 </li>
                 <li class="nav-item dropdown">
                     <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ \App\Services\CurrencyConversion::getCurrencySymbol() }}
+                        {{ $currencySymbol }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
-                        @foreach(\App\Services\CurrencyConversion::getCurrencies() as $currency)
-                            <li><a class="dropdown-item" href="{{ route('currency', $currency->code) }}">{{ $currency->symbol }}</a></li>
+                        @foreach($currencies as $currency)
+                            <li><a class="dropdown-item"
+                                   href="{{ route('currency', $currency->code) }}">{{ $currency->symbol }}</a></li>
                         @endforeach
 
                     </ul>
@@ -92,6 +93,29 @@
     @endif
     @yield('content')
 </main>
+
 </body>
+<footer class="bg-dark text-light mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mt-2"><p>Категории товаров</p>
+                <ul class="navbar-nav">
+                    @foreach($categories as $category)
+                        <li class="nav-item"><a class="nav-link mb-2"
+                                                href="{{ route('category', $category->code) }}">{{ $category->__('name') }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-lg-6 mt-2"><p>Самые популярные товары</p>
+                <ul class="navbar-nav">
+                    @foreach($bestProducts as $bestProduct)
+                        <li><a class="nav-link mb-2" href="{{ route('product', [$bestProduct->category->code, $bestProduct->code]) }}">{{ $bestProduct->name }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>
 

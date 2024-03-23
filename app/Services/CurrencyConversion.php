@@ -13,7 +13,7 @@ class CurrencyConversion
     public static function loadContainer()
     {
         if (is_null(self::$container)) {
-            $currencies =  Currency::get();
+            $currencies = Currency::get();
             foreach ($currencies as $currency) {
                 self::$container[$currency->code] = $currency;
             }
@@ -56,11 +56,15 @@ class CurrencyConversion
             $targetCurrencyCode = self::getCurrencyFromSession();
         }
         $targetCurrency = self::$container[$targetCurrencyCode];
-        if ($targetCurrency->rate == 0 || $targetCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
-            CurrencyRates::getRates();
-            self::loadContainer();
-            $targetCurrency = self::$container[$targetCurrencyCode];
+
+        if ($targetCurrency->code != 'UAH') {
+            if ($targetCurrency->rate == 0 || $targetCurrency->updated_at->startOfDay() != Carbon::now()->startOfDay()) {
+                CurrencyRates::getRates();
+                self::loadContainer();
+                $targetCurrency = self::$container[$targetCurrencyCode];
+            }
         }
+
 
         return round($sum * $originCurrency->rate / $targetCurrency->rate, 1);
     }
@@ -81,7 +85,7 @@ class CurrencyConversion
         $arr = [];
         foreach (self::$container as $code => $currency) {
             if ($currency->notMain()) {
-                 $arr[] .= $code;
+                $arr[] .= $code;
             }
         }
         return $arr;

@@ -5,7 +5,7 @@
     <div class="container">
         <h2 class="text-center mb-3">{{ $product->__('name') }}</h2>
         <h4 class="text-center mb-3">{{ $product->category->__('name') }}</h4>
-        <p class="text-center mb-3">Цена: <strong>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</strong></p>
+        <p class="text-center mb-3">Цена: <strong>{{ $product->price }} {{ $currencySymbol }}</strong></p>
         <div class=" mx-auto">
             <div class="card border-0">
                 <img height="240px" class=" m-auto" src="{{\Illuminate\Support\Facades\Storage::url($product->image)}}"
@@ -25,7 +25,7 @@
                                 <form action="{{ route('subscription', $product) }}" method="post">
                                     @csrf
                                     <input class="mb-3 mt-3" type="text" name="email">
-                                    <button class="btn btn-primary" type="submit">Отправить</button>
+                                    <button class="btn btn-primary mb-5" type="submit">Отправить</button>
                                 </form>
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>

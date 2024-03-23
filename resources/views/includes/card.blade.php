@@ -19,7 +19,7 @@
              alt="dhd">
         <div style="height: 100%" class="card-body">
             <h5 class="text-center">{{mb_substr($product->name ,0, 30). ' ...' }}</h5>
-            <p class="card-text text-center">Цена: {{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</p>
+            <p class="card-text text-center">Цена: {{ $product->price }} {{ $currencySymbol }}</p>
             <p class="text-center">{{isset($category) ? $category->__('name') : $product->category->__('name') }}</p>
             <div class="d-flex justify-content-center ">
                 <div class="me-2">
