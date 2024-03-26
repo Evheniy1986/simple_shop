@@ -109,30 +109,25 @@
                                    value="{{ isset($product) ? $product->image : old('image') }}">
                         </div>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-3">
-                            Цена
+                            Свойства товаров
                         </div>
                         <div class="col-9">
-                            <input type="text" name="price" class="form-control"
-                                   value="{{ isset($product) ? $product->price : old('price') }}">
+                            <select class="form-select" name="property_id[]" aria-label="Пример выбора по умолчанию" multiple>
+                                @foreach($properties as $property)
+                                    <option
+                                        {{ isset($product) && $product->properties->contains($property->id) ? 'selected' : ''}}
+                                            value="{{ $property->id }}">{{ $property->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('property_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @error('price')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-3">
-                            Количество
-                        </div>
-                        <div class="col-9">
-                            <input type="number" name="count" class="form-control"
-                                   value="{{ isset($product) ? $product->count : old('count') }}">
-                        </div>
-                        @error('price')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     @foreach(['hit' => 'Хит', 'new' => 'Новинка', 'recommend' => 'Рекомендуемые'] as $field => $title)
                         <div class="row mb-3">
                             <div class="col-3">

@@ -11,8 +11,7 @@
                 <th scope="col">Код</th>
                 <th scope="col">Название</th>
                 <th scope="col">Категория</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Количество</th>
+                <th scope="col">Кол-во тов предлож</th>
                 <th scope="col">Действие</th>
             </tr>
             </thead>
@@ -23,8 +22,7 @@
                     <td>{{mb_substr($product->code, 0, 20) }}</td>
                     <td>{{ mb_substr($product->name, 0, 30) }}</td>
                     <td>{{ $product->category->name }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->count }}</td>
+                    <td><a class="btn btn-success btn-sm" role="button" href="{{ route('skus.index', $product) }}">Skus</a></td>
                     <td>
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="post">

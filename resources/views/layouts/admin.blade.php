@@ -31,6 +31,9 @@
                         <a class="nav-link" href="{{ route('products.index') }}">Товары</a>
                     </li>
                     <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('properties.index') }}">Свойства</a>
+                    </li>
+                    <li class="nav-item ">
                         <a class="nav-link" href="{{ route('home') }}">Заказы</a>
                     </li>
                 @else

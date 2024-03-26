@@ -47,7 +47,7 @@
             </tr>
             <tr>
                 <td>Количество</td>
-                <td>{{ $product->count }} шт.</td>
+                <td> шт.</td>
             </tr>
             <tr>
                 <td>Лейблы</td>

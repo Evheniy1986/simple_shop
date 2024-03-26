@@ -35,6 +35,17 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function skus()
+    {
+        return $this->hasMany(Sku::class);
+    }
+
+    //todo: check table name
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class, 'property_products')->withTimestamps();
+    }
+
     public function getPriceCount()
     {
         if (!is_null($this->pivot->quantity)) {

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class PropertyOptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,9 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'name' => 'required|min:3|max:255',
-            'code' => 'required|min:3|max:255|unique:products,code,'. (isset($this->product) ? $this->product->id : ''),
-            'description' => 'required|min:5',
-            'category_id' => 'required',
+        return [
+            'name' => 'required',
+            'name_en' => 'required',
         ];
-
-        return $rules;
     }
 }
