@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Product;
+use App\Models\Sku;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,18 +14,14 @@ class SendSubscribtionMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $product;
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(Product $product)
+    protected $sku;
+
+    public function __construct(Sku $sku)
     {
-        $this->product = $product;
+        $this->sku = $sku;
     }
 
-    /**
-     * Get the message envelope.
-     */
+
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -33,14 +29,11 @@ class SendSubscribtionMessage extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
             view: 'mail.subscription',
-            with: ['product' => $this->product],
+            with: ['sku' => $this->sku],
         );
     }
 

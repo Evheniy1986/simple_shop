@@ -54,21 +54,21 @@ Route::middleware('set_locale')->group(function () {
 
     Route::get('/', [MainController::class, 'index'])->name('index');
     Route::get('/categories', [MainController::class, 'categories'])->name('categories');
-    Route::post('/subscription/{product}', [MainController::class, 'subscribe'])->name('subscription');
+    Route::post('/subscription/{sku}', [MainController::class, 'subscribe'])->name('subscription');
 
     Route::prefix('basket')->group(function () {
-        Route::post('/add/{product}', [BasketController::class, 'basketAdd'])->name('basket-add');
+        Route::post('/add/{sku}', [BasketController::class, 'basketAdd'])->name('basket-add');
 
         Route::middleware('basket_not_empty')->group(function () {
             Route::get('/', [BasketController::class, 'basket'])->name('basket');
             Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
             Route::post('/place', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
-            Route::post('/remove/{product}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+            Route::post('/remove/{sku}', [BasketController::class, 'basketRemove'])->name('basket-remove');
         });
     });
 
     Route::get('/{category}', [MainController::class, 'category'])->name('category');
-    Route::get('/{category}/{product}', [MainController::class, 'product'])->name('product');
+    Route::get('/{category}/{product}/{sku}', [MainController::class, 'product'])->name('product');
 });
 
 

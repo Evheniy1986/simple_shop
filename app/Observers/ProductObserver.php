@@ -3,16 +3,17 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Models\Sku;
 use App\Models\Subscribtion;
 
 class ProductObserver
 {
-    public function updating(Product $product)
+    public function updating(Sku $sku)
     {
-        $oldCount = $product->getOriginal('count');
+        $oldCount = $sku->getOriginal('count');
 
-        if ($oldCount == 0 && $product->count > 0) {
-            Subscribtion::sendEmailBySubscription($product);
+        if ($oldCount == 0 && $sku->count > 0) {
+            Subscribtion::sendEmailBySubscription($sku);
 
         }
     }

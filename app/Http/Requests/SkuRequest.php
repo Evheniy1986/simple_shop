@@ -22,7 +22,7 @@ class SkuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'count' => 'required|numeric|min:1',
+            'count' => 'required|numeric|min:0',
             'price' => 'required|numeric|min:0',
         ];
     }

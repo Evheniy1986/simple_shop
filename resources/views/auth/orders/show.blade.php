@@ -18,15 +18,15 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $product)
+            @foreach($skus as $sku)
                 <tr>
                     <td><img class="card-img-top img-fluid m-auto" style="width: 3rem"
-                             src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="dhd">
-                        <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
+                             src="{{ \Illuminate\Support\Facades\Storage::url($sku->product->image) }}" alt="dhd">
+                        <a href="{{ route('product', [$sku->product->category->code, $sku->product->code, $sku]) }}">{{ $sku->product->__('name') }}</a>
                     </td>
-                    <td><span class="badge text-bg-secondary">{{ $product->pivot->quantity }}</span></td>
-                    <td>{{ $product->pivot->price }} {{ $order->currency->symbol }}</td>
-                    <td>{{ $product->pivot->price * $product->pivot->quantity}} {{ $order->currency->symbol }}</td>
+                    <td><span class="badge text-bg-secondary">{{ $sku->pivot->quantity }}</span></td>
+                    <td>{{ $sku->pivot->price }} {{ $order->currency->symbol }}</td>
+                    <td>{{ $sku->pivot->price * $sku->pivot->quantity}} {{ $order->currency->symbol }}</td>
                 </tr>
             @endforeach
 

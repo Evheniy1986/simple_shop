@@ -13,26 +13,27 @@ class Subscribtion extends Model
 
     protected $fillable = [
         'email',
-        'product_id',
+        'sku_id',
+        'status',
     ];
 
-    public function scopeActiveByProductId($query, $productId)
+    public function scopeActiveBySkuId($query, $skuId)
     {
-        return $query->where('status', 0)->where('product_id', $productId);
+        return $query->where('status', 0)->where('sku_id', $skuId);
     }
 
-    public function product()
+    public function sku()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Sku::class);
     }
 
-    public static function sendEmailBySubscription(Product $product)
+    public static function sendEmailBySubscription(Sku $sku)
     {
-        $subscriptions = self::ActiveByProductId($product->id)->get();
+        $subscriptions = self::ActiveBySkuId($sku->product->id)->get();
         foreach ($subscriptions as $subscription) {
-            Mail::to($subscription->email)->send(new SendSubscribtionMessage($product));
             $subscription->status = 1;
             $subscription->save();
+            Mail::to($subscription->email)->send(new SendSubscribtionMessage($sku));
         }
     }
 }

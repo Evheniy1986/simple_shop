@@ -4,6 +4,7 @@ namespace App\ViewComposers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Sku;
 use Illuminate\View\View;
 
 class BestProductComposer
@@ -12,11 +13,11 @@ class BestProductComposer
     {
 
 
-        $bestProductsId = Order::query()->get()->map->products->flatten()->map->pivot->mapToGroups(function ($pivot) {
-            return [$pivot->product_id => $pivot->quantity];
+        $bestProductsId = Order::query()->get()->map->skus->flatten()->map->pivot->mapToGroups(function ($pivot) {
+            return [$pivot->sku_id => $pivot->quantity];
         })->map->sum()->sortDesc()->take(3)->keys()->toArray();
 
-        $bestProducts = Product::query()->whereIn('id', $bestProductsId)->get();
+        $bestProducts = Sku::query()->whereIn('id', $bestProductsId)->get();
 
         $view->with('bestProducts', $bestProducts);
     }

@@ -37,12 +37,12 @@
             </div>
         </form>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mx-auto">
-            @foreach($products as $product)
-                @include('includes.card', compact('product'))
+            @foreach($skus as $sku)
+                @include('includes.card', compact('sku'))
             @endforeach
         </div>
         <div class="mt-5 mx-auto">
-            {{ $products->links() }}
+            {{ $skus->links() }}
         </div>
     </div>
 @endsection

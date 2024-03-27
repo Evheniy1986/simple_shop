@@ -46,18 +46,6 @@ class Product extends Model
         return $this->belongsToMany(Property::class, 'property_products')->withTimestamps();
     }
 
-    public function getPriceCount()
-    {
-        if (!is_null($this->pivot->quantity)) {
-            return $this->pivot->quantity * $this->price;
-        }
-        return $this->price;
-    }
-
-    public function isAvailable(): bool
-    {
-       return !$this->trashed() && $this->count > 0;
-    }
 
     public function scopeHit($query)
     {

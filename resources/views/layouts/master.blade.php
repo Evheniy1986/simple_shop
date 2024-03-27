@@ -110,7 +110,7 @@
             <div class="col-lg-6 mt-2"><p>Самые популярные товары</p>
                 <ul class="navbar-nav">
                     @foreach($bestProducts as $bestProduct)
-                        <li><a class="nav-link mb-2" href="{{ route('product', [$bestProduct->category->code, $bestProduct->code]) }}">{{ $bestProduct->name }}</a></li>
+                        <li><a class="nav-link mb-2" href="{{ route('product', [$bestProduct->product->category->code, $bestProduct->product->code, $bestProduct]) }}">{{ $bestProduct->product->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

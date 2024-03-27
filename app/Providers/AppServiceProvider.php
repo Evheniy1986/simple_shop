@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Product;
+use App\Models\Sku;
 use App\Observers\ProductObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -28,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo Route::currentRouteNamed($route) ? 'class=\"nav-link active\"' : 'class=\"nav-link\"'?>";
         });
 
-        Product::observe(ProductObserver::class);
+        Sku::observe(ProductObserver::class);
 
         Paginator::useBootstrapFive();
     }

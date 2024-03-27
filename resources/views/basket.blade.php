@@ -14,26 +14,26 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($order->products as $product)
+            @foreach($order->skus as $sku)
                 <tr>
                     <td><img class="card-img-top img-fluid m-auto" style="width: 3rem"
-                             src="{{ \Illuminate\Support\Facades\Storage::url($product->image) }}" alt="dhd">
-                        <a href="{{ route('product', [$product->category->code, $product->code]) }}">{{ $product->name }}</a>
+                             src="{{ \Illuminate\Support\Facades\Storage::url($sku->product->image) }}" alt="dhd">
+                        <a href="{{ route('product', [$sku->product->category->code, $sku->product->code, $sku]) }}">{{ $sku->product->name }}</a>
                     </td>
-                    <td><span class="badge text-bg-secondary">{{ $product->countInOrder }}</span>
+                    <td><span class="badge text-bg-secondary">{{ $sku->countInOrder }}</span>
                         <div class="btn-group">
-                            <form action="{{ route('basket-remove', $product) }}" method="post">
+                            <form action="{{ route('basket-remove', $sku) }}" method="post">
                                 @csrf
                                 <button class="btn btn-danger" type="submit">-</button>
                             </form>
-                            <form action="{{ route('basket-add', $product) }}" method="post">
+                            <form action="{{ route('basket-add', $sku) }}" method="post">
                                 @csrf
                                 <button class="btn btn-success" type="submit">+</button>
                             </form>
                         </div>
                     </td>
-                    <td>{{ $product->price }} {{ $currencySymbol }}</td>
-                    <td>{{ $product->price * $product->countInOrder }} {{ $currencySymbol }}</td>
+                    <td>{{ $sku->price }} {{ $currencySymbol }}</td>
+                    <td>{{ $sku->price * $sku->countInOrder }} {{ $currencySymbol }}</td>
                 </tr>
             @endforeach
 
