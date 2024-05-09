@@ -1,4 +1,5 @@
-*.php linguist-detectable=true
+* linguist-vendored
+*.php linguist-vendored=false
 * text=auto eol=lf
 
 *.blade.php diff=html
