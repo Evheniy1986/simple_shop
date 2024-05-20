@@ -6,7 +6,7 @@
         <h2 class="text-center mb-3">Все Товары</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             @foreach($products as $product)
-            <div class="col" style="width: 20rem">
+            <div class="col product" data-product-id="{{ $product->id }}" style="width: 20rem">
                 <div class="card shadow-sm">
                     <img class="card-img-top img-fluid" src="{{ \Illuminate\Support\Facades\Storage::url($product->preview_image) }}" alt="{{ $product->title }}">
                     <div class="card-body">
@@ -16,7 +16,7 @@
 
                         <div class="d-flex justify-content-center">
                             <div class="me-2">
-                                <button type="button" class="btn btn-primary">В корзину</button>
+                                <a href="{{ route('basket.add') }}" type="submit" class="btn btn-primary add-to-cart">В корзину</a>
                             </div>
                             <div>
                                 <a href="{{ route('product.show', [$product->category->code, $product]) }}" type="button" class="btn btn-outline-secondary">Подробнее</a>

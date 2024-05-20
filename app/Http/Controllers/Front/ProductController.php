@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function show($categoryCode, Product $product)
     {
-//        dd($categoryCode, $product);
         return view('front.product.show',compact('product'));
     }
+
 }

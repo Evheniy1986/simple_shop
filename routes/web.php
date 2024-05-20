@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TagController;
@@ -23,11 +24,18 @@ Route::get('/categories', [\App\Http\Controllers\Front\CategoryController::class
 Route::get('/categories/{category}', [\App\Http\Controllers\Front\CategoryController::class, 'show'])->name('categories.show');
 Route::get('/categories/{category}/products/{product}', [\App\Http\Controllers\Front\ProductController::class, 'show'])->name('product.show');
 
-Route::prefix('admin')-> name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', \App\Http\Controllers\MainController::class)->name('index');
     Route::resource('categories', CategoryController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+});
+
+Route::prefix('basket')->group(function () {
+    Route::get('add-to-cart', [CartController::class, 'addTooCart'])->name('basket.add');
+    Route::get('/', [CartController::class, 'index'])->name('basket.show');
+    Route::post('add-quantity/{product}', [CartController::class, 'addQuantity'])->name('basket.addQuantity');
+    Route::post('remove-quantity/{product}', [CartController::class, 'removeQuantity'])->name('basket.removeQuantity');
 });
 
 
