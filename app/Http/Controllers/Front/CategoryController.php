@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -17,7 +15,7 @@ class CategoryController extends Controller
 
     public function show( $categoryCode)
     {
-        $category = Category::with('products')->where('code', $categoryCode)->first();
+        $category = Category::with('products')->where('slug', $categoryCode)->first();
 
         return view('front.categories.show', compact('category'));
     }

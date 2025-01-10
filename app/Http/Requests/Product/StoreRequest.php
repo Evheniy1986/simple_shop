@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreRequest extends FormRequest
 {
@@ -25,13 +26,22 @@ class StoreRequest extends FormRequest
             'title' => 'required|string|min:3',
             'description' => 'required|string|min:3',
             'content' => 'required|string|min:3',
-            'preview_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+            'preview_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5000',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5000',
             'price' => 'required|numeric',
             'count' => 'required|numeric|integer',
             'is_published' => 'nullable',
-            'category_id' => 'nullable|numeric|integer',
-            'tags' => 'nullable|array',
-            'colors' => 'nullable|array',
+            'category_id' => 'nullable|numeric|integer|exists:categories,id',
+            'brand_id' => 'nullable|numeric|exists:brands,id',
+            'slug' => 'nullable'
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => ($this->slug ?? Str::slug($this->title))
+        ]);
     }
 }

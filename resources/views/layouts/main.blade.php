@@ -8,6 +8,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+{{--    @livewireStyles--}}
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
     <!-- Font Awesome -->
@@ -16,13 +17,15 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
+{{--    @vite(['resources/css/app.css',  'resources/js/app.js', 'resources/js/admin.js'])--}}
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <p class="animation__shake">Магаз</p>
+        <a href="{{ route('main.index') }}">Магаз</a>
     </div>
 
     <!-- Navbar -->
@@ -133,55 +136,21 @@
         </a>
 
         <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
-                            <i class="nav-icon fas fa-shopping-bag"></i>
-                            <p>
-                                Заказы
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.products.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-apple-alt"></i>
-                            <p>
-                                Продукты
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.categories.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tasks"></i>
-                            <p>
-                                Категории
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.users.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>
-                                Пользователи
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
+        @include('admin.partials.sidebar')
         <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-      @yield('content')
+        <div id="warningMessage">
+            @if(session()->has('success'))
+                <div class="alert alert-success text-center text-bold">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+        @yield('content')
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -198,6 +167,7 @@
 </div>
 <!-- ./wrapper -->
 
+{{--@livewireScripts--}}
 <!-- jQuery -->
 <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -206,19 +176,23 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
+
+<script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="{{ asset('assets/js/admin.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 <script src="{{ asset('adminlte/plugins/select2/js/select2.full.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
 
 <script>
+
     $('.select2').select2()
 
-    //Initialize Select2 Elements
     $('.select2bs4').select2({
         theme: 'bootstrap4'
     })
@@ -231,7 +205,21 @@
         });
     });
 
+
+    $(function () {
+        // Summernote
+        $('.summernote').summernote()
+
+        // CodeMirror
+        // CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+        //     mode: "htmlmixed",
+        //     theme: "monokai"
+        // });
+    })
+
+
 </script>
+{{--@livewireScripts--}}
 </body>
 </html>
 

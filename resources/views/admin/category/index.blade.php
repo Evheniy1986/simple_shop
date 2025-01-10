@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Home</a></li>
                         <li class="breadcrumb-item active">Категории</li>
                     </ol>
                 </div><!-- /.col -->
@@ -35,6 +35,7 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Картинка</th>
                                 <th>Название</th>
                                 <th rowspan="3">Действия</th>
                             </tr>
@@ -44,7 +45,11 @@
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td>
-                                        <a href="{{route('admin.categories.show', $category)}}">{{ $category->title }}</a>
+                                        <img style="height: 70px; width: 70px;" src="{{ \Illuminate\Support\Facades\Storage::url( $category->image) }}" alt="{{ $category->title }}">
+                                    </td>
+
+                                    <td>
+                                        <a href="{{route('admin.categories.show', $category->slug)}}">{{ $category->title }}</a>
                                     </td>
 
                                         <td class="btn-group">

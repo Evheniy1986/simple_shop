@@ -12,24 +12,33 @@
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Dashboard v1</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a class="btn btn-primary" href="{{ route('admin.products.edit', $product) }}">Редактировать</a>
+                        <div class="card-header g-2">
+
+                            <select class="custom-select form-control w-25" aria-label="Default select example" onchange="location = this.value;">
+                                <option disabled selected>Добавить опцию к продукту</option>
+                                <option value="{{ route('admin.values.create', $product) }}">Создать опцию для продукта</option>
+                                <option value="{{ route('admin.values.edit', $product) }}">Редактировать опцию для продукта</option>
+                                <option value="{{ route('admin.values.destroy', $product) }}">Удалить все опции для продукта</option>
+                            </select>
+
+                            <select class="custom-select form-control w-25" aria-label="Default select example" onchange="location = this.value;">
+                                <option disabled selected>Добавить характеристику к продукту </option>
+                                <option value="{{ route('admin.property_products.create', $product) }}">Создать характеристику для продукта</option>
+                                <option value="{{ route('admin.property_products.edit', $product) }}">Редактировать характеристику для продукта</option>
+                                <option value="{{ route('admin.property_products.destroy', $product) }}">Удалить все зарактеристики для продукта</option>
+                            </select>
                         </div>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
 
@@ -43,16 +52,17 @@
                                 <td>{{ $product->title }}</td>
                             </tr>
                             <tr>
-                                <td>Картинка</td>
-                                <td><img src="{{ asset('storage/'.$product->preview_image) }}" alt=""></td>
+                                <td>Превью</td>
+                                <td><img style="width: 200px; height: 200px;"
+                                         src="{{ asset('storage/'.$product->preview_image) }}" alt=""></td>
                             </tr>
                             <tr>
                                 <td>Описание</td>
-                                <td>{{ $product->description }}</td>
+                                <td>{!! $product->description !!}</td>
                             </tr>
                             <tr>
                                 <td>Контент</td>
-                                <td>{{ $product->content }}</td>
+                                <td>{!! $product->content !!}</td>
                             </tr>
                             <tr>
                                 <td>Цена</td>
@@ -64,33 +74,43 @@
                             </tr>
                             <tr>
                                 <td>Опубликованно</td>
-                                <td>{{ $product->is_published }}</td>
+                                <td>{{ $product->is_published == 1 ? 'Опубликованно' : 'Не Опубликованно' }}</td>
                             </tr>
                             <tr>
                                 <td>Категория</td>
                                 <td>{{ $product->category->title ?? '' }}</td>
                             </tr>
                             <tr>
-                                <td>Тег</td>
-                                @foreach($product->tags as $productTag)
-                                <td>{{  $productTag->title }}</td>
-                                @endforeach
+                                <td>Картинки</td>
+                                    <div class="d-flex flex-wrap gap-1 justify-content-center align-items-center">
+                                        @foreach($product->images as $image)
+                                        <td><img class="rounded" style="width: 200px; height: 200px; object-fit: cover;"
+                                                 src="{{ asset('storage/'.$image->image_path) }}" alt=""></td>
+                                        @endforeach
+                                    </div>
                             </tr>
+
                             <tr>
-                                <td>Цвет</td>
-                                @foreach($product->colors as $productColor)
-                                   <td><div style="width: 16px; height: 16px; background: {{ '#' . $productColor->color }}"></div></td>
+                                @foreach($product->optionValues as $value)
+                                    <td>{{ $value->option->title ?? 'Без названия' }} : {{ $value->value ?? 'Без значения' }}</td>
                                 @endforeach
                             </tr>
+
+
+                            <tr>
+                                @foreach($product->properties as $property)
+                                    <td>{{ $property->name ?? 'Без названия' }} : {{ $property->pivot->value ?? 'Без значения' }}</td>
+                                @endforeach
+                            </tr>
+
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
+
+        </div>
     </section>
 @endsection
 

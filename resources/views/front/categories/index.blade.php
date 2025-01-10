@@ -10,7 +10,7 @@
                         <img class="card-img-top img-fluid m-auto" style="width: 3rem" src="{{ \Illuminate\Support\Facades\Storage::url($category->image) }}"
                              alt="{{ $category->title }}">
                         <div class="card-body">
-                            <a href="{{ route('categories.show', $category->code) }}"><h5 class="text-center border-0">{{ $category->title }}</h5></a>
+                            <a href="{{ route('categories.show', $category->slug) }}"><h5 class="text-center border-0">{{ $category->title }}</h5></a>
                             <p class="card-text text-center">{{ $category->description }}</p>
                             <hr>
                         </div>

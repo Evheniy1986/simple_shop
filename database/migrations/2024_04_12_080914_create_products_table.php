@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->text('content');
             $table->string('preview_image')->nullable();
 
-            $table->integer('price');
+            $table->unsignedInteger('price')->default(0);
             $table->unsignedInteger('count');
             $table->boolean('is_published')->default(true);
 
-            $table->foreignId('category_id')->nullable()->index()->constrained('categories');
+            $table->foreignId('category_id')->nullable()->index()->constrained('categories')->nullOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->nullOnDelete();
 
             $table->timestamps();
         });

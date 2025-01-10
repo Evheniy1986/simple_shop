@@ -17,7 +17,7 @@
                                 <a href="{{ route('basket.add') }}" type="submit" class="btn btn-primary add-to-cart">В корзину</a>
                             </div>
                             <div>
-                                <a href="{{ route('product.show', [$category->code, $product->id]) }}" type="button" class="btn btn-outline-secondary">Подробнее</a>
+                                <a href="{{ route('product.show',  $product->id) }}" type="button" class="btn btn-outline-secondary">Подробнее</a>
                             </div>
                         </div>
                     </div>

@@ -27,15 +27,15 @@ class CategoryRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'min:3',],
             'description' => ['required', 'string', 'min:5'],
-            'code' => ['required', 'string', Rule::unique('categories', 'code')->ignore($this->category)],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:5000'],
+            'slug' => ['required', 'string', Rule::unique('categories', 'slug')->ignore($this->category)],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,svg', 'max:5000'],
         ];
     }
 
     public function prepareForValidation()
     {
         $this->merge([
-            'code' => ($this->code ?? Str::slug($this->title))
+            'slug' => ($this->slug ?? Str::slug($this->title))
         ]);
     }
 }

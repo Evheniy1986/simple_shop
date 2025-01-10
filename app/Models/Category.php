@@ -9,10 +9,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'code', 'image'];
+    protected $fillable = ['title', 'description', 'slug', 'image'];
 
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class)->withTimestamps();
     }
 }

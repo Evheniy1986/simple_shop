@@ -24,12 +24,12 @@
             <!-- Small boxes (Stat box) -->
             <h3 class="text-center mb-4">Редактирование продукта</h3>
             <div class="">
-                <form action="{{ route('admin.products.update', $product) }}" method="post" enctype="multipart/form-data">
+                <form class=" w-75 m-auto" action="{{ route('admin.products.update', $product) }}" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Название</label>
-                        <div class="col-sm-10">
+                    <div class="mb-3">
+                        <label for="inputPassword" class="col-form-label">Название</label>
+                        <div class="">
                             @error('title')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -37,29 +37,29 @@
                                    id="inputPassword">
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Описание</label>
-                        <div class="col-sm-10">
+                    <div class="mb-3">
+                        <label for="inputPassword" class="col-form-label">Описание</label>
+                        <div class="">
                             @error('description')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
-                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                            <textarea class="form-control summernote" name="description" id="exampleFormControlTextarea1"
                                       rows="3">{{ $product->description }}</textarea>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Контент</label>
-                        <div class="col-sm-10">
+                    <div class="mb-3">
+                        <label for="inputPassword" class="col-form-label">Контент</label>
+                        <div class="">
                             @error('content')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
-                            <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
+                            <textarea class="form-control summernote" name="content" id="exampleFormControlTextarea1"
                                       rows="3">{{ $product->content }}</textarea>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Цена</label>
-                        <div class="col-sm-10">
+                    <div class="mb-3">
+                        <label for="inputPassword" class="col-form-label">Цена</label>
+                        <div class="">
                             @error('price')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -67,9 +67,9 @@
                                    id="inputPassword">
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Колличество</label>
-                        <div class="col-sm-10">
+                    <div class="mb-3">
+                        <label for="inputPassword" class="col-form-label">Колличество</label>
+                        <div class="">
                             @error('count')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -83,7 +83,7 @@
                     <img class="im" style="width: 90px; height: 90px"
                          src="{{ \Illuminate\Support\Facades\Storage::url($product->preview_image) }}" alt="">
                     <div class=" mb-3 form-group">
-                        <label for="exampleInputFile">Вставьте изображение</label>
+                        <label for="exampleInputFile">Превью изображение</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 @error('preview_image')
@@ -99,8 +99,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3 mt-3 row">
-                        <select class="custom-select form-control" name="category_id" id="">
+
+                    @error('images')
+                    <div class="text-danger">{{$message}}</div>
+                    @enderror
+                        <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center">
+                            @foreach($product->images as $image)
+                                <img class="rounded" style="width: 90px; height: 90px; object-fit: cover;"
+                                     src="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}"
+                                     alt="{{ $product->title }}">
+                                <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"> Удалить
+                            @endforeach
+                        </div>
+                    <div class="mb-3 form-group">
+                        <label for="exampleInputFile">Основные изображения</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="images[]" class="custom-file-input" multiple id="exampleInputFile">
+                                <label class="custom-file-label" for="exampleInputFile">Выберите файлы</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Загрузить</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3 mt-3">
+                        <label for="category_id" >Выберите категрию</label>
+                        <select class="custom-select form-control" name="category_id" id="category_id">
                             <option disabled selected>Выберите категрию</option>
                             @foreach($categories as $category)
                                 <option
@@ -108,8 +135,20 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="mb-3 mt-3">
+                        <label for="brand_id">Выберите бренд</label>
+                        <select class="custom-select form-control" name="brand_id" id="brand_id">
+                            <option disabled selected>Выберите бренд</option>
+                            @foreach($brands as $brand)
+                                <option value="{{ $brand->id }}" {{ $brand->id == $product->brand_id ? 'selected' : '' }}>
+                                    {{ $brand->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="text-right mb-5">
-                        <button class="btn btn-success" type="submit">Создать Продукт</button>
+                        <button class="btn btn-success" type="submit">Редактировать Продукт</button>
                     </div>
                 </form>
             </div>

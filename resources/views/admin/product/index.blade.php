@@ -52,13 +52,28 @@
                                     <td>
                                         <img style="height: 70px; width: 70px;" src="{{ \Illuminate\Support\Facades\Storage::url( $product->preview_image) }}" alt="{{ $product->title }}">
                                     </td>
-                                    <td>
-                                        {{ $product->description }}
+                                    <td  style="word-wrap: break-word">
+                                        {!! \Illuminate\Support\Str::limit($product->description, 10, '...')  !!}
                                     </td>
-                                    <td>
-                                        {{ $product->content }}
+                                    <td  style="word-wrap: break-word">
+                                        {!! \Illuminate\Support\Str::limit($product->content, 10, '...') !!}
                                     </td>
                                         <td class="btn-group">
+
+                                            <select class="custom-select form-control w-25" aria-label="Default select example" onchange="location = this.value;">
+                                                <option disabled selected>Опции</option>
+                                                <option value="{{ route('admin.values.create', $product) }}">Создать опцию для продукта</option>
+                                                <option value="{{ route('admin.values.edit', $product) }}">Редактировать опцию для продукта</option>
+                                                <option value="{{ route('admin.values.destroy', $product) }}">Удалить все опции для продукта</option>
+                                            </select>
+
+                                            <select class="custom-select form-control w-25" aria-label="Default select example" onchange="location = this.value;">
+                                                <option disabled selected>Характеристики</option>
+                                                <option value="{{ route('admin.property_products.create', $product) }}">Создать характеристику для продукта</option>
+                                                <option value="{{ route('admin.property_products.edit', $product) }}">Редактировать характеристику для продукта</option>
+                                                <option value="{{ route('admin.property_products.destroy', $product) }}">Удалить все зарактеристики для продукта</option>
+                                            </select>
+
                                             <a class="btn btn-info" href="{{ route('admin.products.edit', $product) }}">Редактировать</a>
 
 

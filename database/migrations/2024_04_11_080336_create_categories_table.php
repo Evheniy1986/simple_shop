@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('code');
+            $table->string('slug');
+            $table->unsignedInteger('parent_id')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
+
         });
     }
 

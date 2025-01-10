@@ -25,13 +25,16 @@ class UpdateRequest extends FormRequest
             'title' => 'required|string|min:3',
             'description' => 'required|string|min:3',
             'content' => 'required|string|min:3',
-            'preview_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+            'preview_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5000',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5000',
             'price' => 'required|numeric',
             'count' => 'required|numeric|integer',
             'is_published' => 'nullable',
             'category_id' => 'nullable|numeric|integer',
-            'tags' => 'nullable|array',
-            'colors' => 'nullable|array',
+            'brand_id' => 'nullable|numeric|exists:brands,id',
+            'delete_images' => 'nullable|array'
+
         ];
     }
 }

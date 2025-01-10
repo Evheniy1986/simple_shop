@@ -44,15 +44,7 @@
                             <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ old('description') }}</textarea>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Название</label>
-                        <div class="col-sm-10">
-                            @error('code')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                            <input type="text" name="code" value="{{ old('code') }}" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
+
                     @error('image')
                     <div class="text-danger">{{$message}}</div>
                     @enderror
