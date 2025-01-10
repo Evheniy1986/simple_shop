@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Option;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class OptionValueFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'option_id' => Option::all()->random()->id,
+            'value' => fake()->word(),
         ];
     }
 }

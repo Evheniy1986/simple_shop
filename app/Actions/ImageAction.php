@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
 
 
@@ -56,6 +57,18 @@ class ImageAction
         return $this->resizeImage($dir, $newImage);
     }
 
+
+    public static function createImage($dir = '', $width = 70, $height = 70)
+    {
+        $imageUrl = "https://loremflickr.com/$width/$height";
+
+        $randomName = Str::random(10) . '.jpg';
+
+        $filePath = "$dir/$randomName";
+        Storage::disk('public')->put($filePath, file_get_contents($imageUrl));
+
+        return $filePath;
+    }
 
 
 }

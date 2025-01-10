@@ -49,7 +49,7 @@ class Product extends Model
 
     public function optionValues()
     {
-        return $this->belongsToMany(OptionValue::class)->withTimestamps();
+        return $this->belongsToMany(OptionValue::class, 'option_value_product')->withTimestamps();
     }
 
     public function images()

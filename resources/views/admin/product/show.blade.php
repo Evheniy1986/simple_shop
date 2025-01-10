@@ -24,18 +24,32 @@
                     <div class="card">
                         <div class="card-header g-2">
 
-                            <select class="custom-select form-control w-25" aria-label="Default select example" onchange="location = this.value;">
+                            <select class="custom-select form-control w-25" aria-label="Default select example"
+                                    onchange="location = this.value;">
                                 <option disabled selected>Добавить опцию к продукту</option>
-                                <option value="{{ route('admin.values.create', $product) }}">Создать опцию для продукта</option>
-                                <option value="{{ route('admin.values.edit', $product) }}">Редактировать опцию для продукта</option>
-                                <option value="{{ route('admin.values.destroy', $product) }}">Удалить все опции для продукта</option>
+                                <option value="{{ route('admin.values.create', $product) }}">Создать опцию для
+                                    продукта
+                                </option>
+                                <option value="{{ route('admin.values.edit', $product) }}">Редактировать опцию для
+                                    продукта
+                                </option>
+                                <option value="{{ route('admin.values.destroy', $product) }}">Удалить все опции для
+                                    продукта
+                                </option>
                             </select>
 
-                            <select class="custom-select form-control w-25" aria-label="Default select example" onchange="location = this.value;">
-                                <option disabled selected>Добавить характеристику к продукту </option>
-                                <option value="{{ route('admin.property_products.create', $product) }}">Создать характеристику для продукта</option>
-                                <option value="{{ route('admin.property_products.edit', $product) }}">Редактировать характеристику для продукта</option>
-                                <option value="{{ route('admin.property_products.destroy', $product) }}">Удалить все зарактеристики для продукта</option>
+                            <select class="custom-select form-control w-25" aria-label="Default select example"
+                                    onchange="location = this.value;">
+                                <option disabled selected>Добавить характеристику к продукту</option>
+                                <option value="{{ route('admin.property_products.create', $product) }}">Создать
+                                    характеристику для продукта
+                                </option>
+                                <option value="{{ route('admin.property_products.edit', $product) }}">Редактировать
+                                    характеристику для продукта
+                                </option>
+                                <option value="{{ route('admin.property_products.destroy', $product) }}">Удалить все
+                                    зарактеристики для продукта
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -58,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>Описание</td>
-                                <td>{!! $product->description !!}</td>
+                                <td>{!!  nl2br(wordwrap($product->description, 100, "\n", true)) !!}</td>
                             </tr>
                             <tr>
                                 <td>Контент</td>
@@ -82,27 +96,40 @@
                             </tr>
                             <tr>
                                 <td>Картинки</td>
-                                    <div class="d-flex flex-wrap gap-1 justify-content-center align-items-center">
+
+                                <td>
+                                    <div class="d-flex flex-wrap justify-content-center align-items-center">
                                         @foreach($product->images as $image)
-                                        <td><img class="rounded" style="width: 200px; height: 200px; object-fit: cover;"
-                                                 src="{{ asset('storage/'.$image->image_path) }}" alt=""></td>
+                                            <img class="rounded mr-1"
+                                                 style="width: 200px; height: 200px; object-fit: cover;"
+                                                 src="{{ asset('storage/'.$image->image_path) }}" alt="">
                                         @endforeach
                                     </div>
+                                </td>
+
                             </tr>
 
                             <tr>
-                                @foreach($product->optionValues as $value)
-                                    <td>{{ $value->option->title ?? 'Без названия' }} : {{ $value->value ?? 'Без значения' }}</td>
-                                @endforeach
+                                <th class="text-center">Опции</th>
                             </tr>
 
+                            @foreach($product->optionValues as $value)
+                                <tr>
+                                    <td>{{ $value->option->title ?? 'Без названия' }}
+                                        : {{ $value->value ?? 'Без значения' }}</td>
+                                </tr>
+                            @endforeach
 
                             <tr>
-                                @foreach($product->properties as $property)
-                                    <td>{{ $property->name ?? 'Без названия' }} : {{ $property->pivot->value ?? 'Без значения' }}</td>
-                                @endforeach
+                                <th class="text-center">Характеристики</th>
                             </tr>
 
+                            @foreach($product->properties as $property)
+                                <tr>
+                                    <td>{{ $property->name ?? 'Без названия' }}
+                                        : {{ $property->pivot->value ?? 'Без значения' }}</td>
+                                </tr>
+                            @endforeach
 
                             </tbody>
                         </table>

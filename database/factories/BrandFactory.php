@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Option>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Brand>
  */
-class OptionFactory extends Factory
+class BrandFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +17,10 @@ class OptionFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->word();
         return [
-            'title' => fake()->sentence(2),
+            'name' => $name,
+            'slug' => Str::slug($name)
         ];
     }
 }

@@ -13,6 +13,6 @@ class Option extends Model
 
     public function values()
     {
-        return $this->hasMany(OptionValue::class);
+        return $this->hasMany(OptionValue::class, 'option_id', 'id');
     }
 }
